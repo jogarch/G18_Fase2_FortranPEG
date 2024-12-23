@@ -1,4 +1,16 @@
-module parser
+import Tokenizer from './Tokenizador.js';
+import VisitorFiltroNodos from '../src/visitor/visitorNodos.js'
+
+export async function generateTokenizer(grammar) {
+    const  tokenizer = new Tokenizer();
+    const visitante = new VisitorFiltroNodos();
+    //const nodosFiltrados = obtenerNodos(grammar.map(produccion));
+    console.log(grammar.map((Producciones) => Producciones.accept(tokenizer)).join('\n'));
+
+    //console.log("dentro de generar modulo")
+    //console.log(grammar.map((produccion) => produccion.accept(tokenizer)))
+    //${grammar.map((Producciones) => Producciones.accept(tokenizer)).join('\n')}
+    return `module parser
     implicit none
 
 contains
@@ -192,10 +204,7 @@ contains
             lexeme = ":"
             isRecognized = .true.
             cursor = cursor + 1
-        case ("+")
-            lexeme = "+"
-            isRecognized = .true.
-            cursor = cursor + 1
+
         case ("-")
             lexeme = "-"
             isRecognized = .true.
@@ -214,3 +223,12 @@ contains
     end subroutine checkSymbol
 
 end module parser
+    `;
+}
+
+
+function obtenerNodos(arbolCST) {
+  const visitante = new VisitorFiltroNodos();
+  arbolCST.accept(visitante);
+  return visitante.resultado;
+}
