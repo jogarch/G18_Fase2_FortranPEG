@@ -19,7 +19,7 @@ export default class Tokenizador extends Visitor {
     }
     visitUnion(nodo){
         //console.log("nodo Union")
-        console.log(nodo.exprs)
+        //console.log(nodo.exprs)
         return nodo.exprs
             .map((expr) => expr.accept(this))
             //.filter((str) => str)
@@ -27,7 +27,7 @@ export default class Tokenizador extends Visitor {
     }
 
     visitString(nodo){
-        console.log("llega a este nodo")
+        //console.log("llega a este nodo")
         return `
         if ("${nodo.val}" == input(cursor:cursor + ${nodo.val.length - 1})) then
             allocate( character(len=${nodo.val.length}) :: lexeme)

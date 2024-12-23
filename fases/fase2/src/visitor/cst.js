@@ -46,6 +46,21 @@ export class Expresion extends Nodo {
     }
 
     accept(visitor) {
+        if(this.expr instanceof String){
+            console.log('String ',this.expr.val, 'case-sensitive ',this.expr.isCase , 'qty ',this.qty)
+        }
+        if(this.expr instanceof Identificador){
+            //console.log('Identificador ', this.expr.id)
+        }
+        if(this.expr instanceof Clase){
+            for(let e of this.expr.chars){
+                if(e instanceof Rango){
+                    console.log('Regla ', `[ ${e.bottom} - ${e.top} ]`, 'case-sensitive ',this.expr.isCase, 'qty ',this.qty)
+                } else {
+                    console.log('Regla ', `[ '${e}' ]`, 'case-sensitive ',this.expr.isCase, 'qty ',this.expr.qty)
+                }
+            }
+        }
         return visitor.visitExpresion(this);
     }
 }
@@ -70,6 +85,7 @@ export class Clase extends Nodo {
     }
 
     accept(visitor) {
+        
         return visitor.visitClase(this);
     }
 }
