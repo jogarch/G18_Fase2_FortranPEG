@@ -7,8 +7,6 @@ export async function generateTokenizer(grammar) {
     //const nodosFiltrados = obtenerNodos(grammar.map(produccion));
     console.log(grammar.map((Producciones) => Producciones.accept(tokenizer)).join('\n'));
 
-    //console.log("dentro de generar modulo")
-    //console.log(grammar.map((produccion) => produccion.accept(tokenizer)))
     //${grammar.map((Producciones) => Producciones.accept(tokenizer)).join('\n')}
     return `module parser
     implicit none
